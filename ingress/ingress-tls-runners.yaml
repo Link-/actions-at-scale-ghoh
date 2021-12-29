@@ -26,6 +26,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: test-app
+            name: actions-runner-controller-github-webhook-server
             port: 
-              number: 443
+              number: 80

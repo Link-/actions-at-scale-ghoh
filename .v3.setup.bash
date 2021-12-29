@@ -389,21 +389,19 @@ helm repo update
 # Install the actions-runner-controller Helm chart
 helm upgrade --install \
   -f actions-runner-controller/values.yaml \
-  --namespace actions-runner-system \
+  --namespace default \
   --create-namespace \
   --wait \
   actions-runner-controller \
   actions-runner-controller/actions-runner-controller
 
-# Verify the actions-runner-controller is running
-kubectl get all --namespace actions-runner-system
+# Update the ingress controller
+kubectl apply -f ingress/ingress-tls-runners.yaml --namespace default
 
+# Create a new runner deployment
+kubectl apply -f actions-runner-controller/autoscale_webhook.yaml --namespace default
 
-
-
-
-
-
+# Execute some sample runs
 
 
 ###############################################################################
