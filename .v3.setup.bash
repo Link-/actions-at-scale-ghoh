@@ -279,8 +279,8 @@ az network vnet peering create \
 # Create and deploy a simple testing app
 ###############################################################################
 
-kubectl apply -f test-app.yaml --namespace default
-kubectl apply -f ingress.yaml --namespace default
+kubectl apply -f apps/test-app.yaml --namespace default
+kubectl apply -f ingress/ingress.yaml --namespace default
 
 # Add a DNS alias for the public ip (manually)
 
@@ -347,11 +347,64 @@ helm install cert-manager jetstack/cert-manager \
 
 # Create an issuer: cluster-issuer.yaml;
 # Apply the configuration - it has to be without a namespace!!
-kubectl apply -f cluster-issuer-staging.yaml
+kubectl apply -f cert-manager/cluster-issuer-staging.yaml
 
 # Update the ingress controller to use the cert-manager issuer
-kubectl delete -f ./ingress.yaml -n default
-kubectl apply -f ./ingress-tls.yaml -n default
+# kubectl delete -f ./ingress.yaml -n default
+kubectl apply -f ingress/ingress-tls.yaml -n default
+
+
+###############################################################################
+# Setup actions-runner-controller
+###############################################################################
+
+### 1. Setup a GitHub App
+
+# Permissions
+- Actions: Read-only
+- Contents: Read-only
+- Metadata: Read-only
+- Self-hosted runners: Read and Write
+
+# Webhook events
+- Workflow job
+- Workflow dispatch
+- Workflow run
+
+# Fetch the installation id
+gh token installations -i 135318 -k ~/.ghe/.is-actions-manager.pem
+
+# Update the values.yaml file with the appropriate values
+
+### 2. Install actions-runner-controller
+
+# Add the actions-runner-controller Helm chart repository
+helm repo add \
+  actions-runner-controller \
+  https://actions-runner-controller.github.io/actions-runner-controller
+
+# Update your local Helm chart repository cache
+helm repo update
+
+# Install the actions-runner-controller Helm chart
+helm upgrade --install \
+  -f actions-runner-controller/values.yaml \
+  --namespace actions-runner-system \
+  --create-namespace \
+  --wait \
+  actions-runner-controller \
+  actions-runner-controller/actions-runner-controller
+
+# Verify the actions-runner-controller is running
+kubectl get all --namespace actions-runner-system
+
+
+
+
+
+
+
+
 
 ###############################################################################
 # BREAK

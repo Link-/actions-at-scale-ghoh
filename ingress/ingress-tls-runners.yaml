@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-main
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+    - hosts:
+      - githubactionsatscale.westeurope.cloudapp.azure.com
+      secretName: tlsingress
+  rules:
+  - host: githubactionsatscale.westeurope.cloudapp.azure.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: test-app
+            port:
+              number: 80
+      - path: /runners-scaler
+        pathType: Prefix
+        backend:
+          service:
+            name: test-app
+            port: 
+              number: 443

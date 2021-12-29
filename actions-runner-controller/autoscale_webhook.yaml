@@ -1,0 +1,28 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: azure-runners
+spec:
+  replicas: 0
+  template:
+    spec:
+      organization: Inner-Sanctum
+      labels:
+        - vanilla
+        - azure
+      env:
+      - name: RUNNER_FEATURE_FLAG_EPHEMERAL
+        value: "true"
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: azure-runners-deployment-autoscaler
+spec:
+  scaleTargetRef:
+    name: azure-runners
+  minReplicas: 0
+  maxReplicas: 5
+  scaleUpTriggers:
+  - githubEvent: {}
+    duration: "5m"
