@@ -403,7 +403,6 @@ kubectl apply -f actions-runner-controller/autoscale_webhook.yaml --namespace de
 
 # Execute some sample runs
 
-
 ###############################################################################
 # BREAK
 ###############################################################################
@@ -421,4 +420,3 @@ az aks start \
 ###############################################################################
 
 az group delete --name GitHubActionsRunners
-
