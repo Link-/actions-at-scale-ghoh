@@ -77,7 +77,7 @@ tags
 !.vscode/*.code-snippets
 
 # Custom files
-# *.setup.bash
+*.setup.bash
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,helm,vim
 
