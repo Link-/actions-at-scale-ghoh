@@ -10,6 +10,10 @@ You can watch the 4 episodes here:
 
 > TBD: Add link to the video series
 
+## Reference Architecture
+
+![Reference architecture diagram](./images/GitHub-Actions_shr-arch-ref_v03BD-Azure.png)
+
 ## Folder Structure
 
 ```text
