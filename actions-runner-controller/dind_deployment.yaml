@@ -1,0 +1,32 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: dind-runners
+  namespace: default
+spec:
+  replicas: 0
+  template:
+    spec:
+      organization: Inner-Sanctum
+      labels:
+        - azure
+        - docker
+      image: summerwind/actions-runner-dind
+      dockerdWithinRunnerContainer: true
+      env:
+      - name: RUNNER_FEATURE_FLAG_EPHEMERAL
+        value: "true"
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: dind-runners-deployment-autoscaler
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: dind-runners
+  minReplicas: 0
+  maxReplicas: 5
+  scaleUpTriggers:
+  - githubEvent: {}
+    duration: "5m"
