@@ -78,6 +78,7 @@ tags
 
 # Custom files
 *.setup.bash
+*.pem
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,helm,vim
 

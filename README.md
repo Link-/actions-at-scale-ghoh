@@ -457,6 +457,11 @@ helm upgrade --install \
   actions-runner-controller \
   actions-runner-controller/actions-runner-controller
 
+#
+# Update the ingress/ingress-tls-runners.yaml with the appropriate 
+# hostname and the actions-runner-controller service name
+#
+
 # Update the ingress controller
 kubectl apply -f ingress/ingress-tls-runners.yaml --namespace default
 

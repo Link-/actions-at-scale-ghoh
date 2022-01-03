@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - githubactionsatscale.westeurope.cloudapp.azure.com
+      - githubactionsatscaleoh.westeurope.cloudapp.azure.com
       secretName: tlsingress
   rules:
-  - host: githubactionsatscale.westeurope.cloudapp.azure.com
+  - host: githubactionsatscaleoh.westeurope.cloudapp.azure.com
     http:
       paths:
       - path: /
