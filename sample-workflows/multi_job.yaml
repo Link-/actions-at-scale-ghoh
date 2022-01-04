@@ -1,0 +1,38 @@
+name: Multi-jobs
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  job1:
+    # The type of runner that the job will run on
+    runs-on: ['azure', 'vanilla']
+
+    steps:
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Job 1
+
+  job2:
+    # The type of runner that the job will run on
+    runs-on: ['azure', 'vanilla']
+
+    steps:
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Job 2
+        
+  job3:
+    # The type of runner that the job will run on
+    runs-on: ['azure', 'vanilla']
+
+    steps:
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Job 3

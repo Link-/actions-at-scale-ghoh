@@ -406,7 +406,6 @@ kubectl apply -f cert-manager/cluster-issuer-staging.yaml
 # Update the ingress controller to use the cert-manager issuer
 kubectl apply -f ingress/ingress-tls.yaml -n default
 ```
-
 ### Setup actions-runner-controller
 
 ```bash
@@ -479,10 +478,20 @@ az aks stop \
   --resource-group GitHubActionsRunners \
   --name GitHubActionsRunnersK8sCluster
 
+# Stop application gateway
+az network application-gateway stop \
+  --resource-group GitHubActionsRunners \
+  --name GitHubActionsRunnersAPGW
+
 # Start AKS
 az aks start \
   --resource-group GitHubActionsRunners \
   --name GitHubActionsRunnersK8sCluster
+
+# Start application gateway
+az network application-gateway start \
+  --resource-group GitHubActionsRunners \
+  --name GitHubActionsRunnersAPGW
 ```
 
 ## NUKE THE SETUP

@@ -1,0 +1,29 @@
+name: Matrix jobs
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  matrix:
+    strategy:
+      matrix:
+        node: [1, 2, 3, 4, 5, 6, 7]
+    # The type of runner that the job will run on
+    runs-on: ['azure', 'vanilla']
+
+    steps:
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo ${{ matrix.node }}
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          sleep 20
+          echo test, and deploy your project.
