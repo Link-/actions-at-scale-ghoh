@@ -340,7 +340,7 @@ APGW_FQDN=$(az network public-ip show \
   --output tsv) \
   && echo $APGW_FQDN
 
-curl -G http://${APGW_FQDN}/
+curl -G https://${APGW_FQDN}
 
 ```
 
@@ -406,6 +406,7 @@ kubectl apply -f cert-manager/cluster-issuer-staging.yaml
 # Update the ingress controller to use the cert-manager issuer
 kubectl apply -f ingress/ingress-tls.yaml -n default
 ```
+
 ### Setup actions-runner-controller
 
 ```bash
@@ -492,6 +493,95 @@ az aks start \
 az network application-gateway start \
   --resource-group GitHubActionsRunners \
   --name GitHubActionsRunnersAPGW
+
+# Remember, when you start the application gateway, you need to 
+# reapply the Ingress configuration, otherwise you'll get 502 errors
+```
+
+## Alternative Practices
+
+### Configuring our Web Application Firewall (WAF)
+
+TBD
+
+### Enable and use Docker in Docker
+
+This is as simple as updating the runner deployment with these properties:
+
+```yaml
+spec:
+  replicas: 0
+  template:
+    spec:
+      organization: Inner-Sanctum
+      labels:
+        - azure
+        - docker
+      image: summerwind/actions-runner-dind
+      dockerdWithinRunnerContainer: true
+```
+
+Then create the new DinD enabled deployment:
+
+```bash
+kubectl apply -f actions-runner-controller/dind_deployment.yaml --namespace default
+```
+
+### Creating custom self-hosted runner images
+
+TBD
+
+### Setup multiple actions-runner-controllers in different namespaces
+
+```bash
+# Create the new namespace
+kubectl create namespace altns
+
+# In order to configure multiple actions-runner-controllers in different
+# namesapces we have to introduce changes to these keys in the values.yaml
+# Replace "altns" with the name of your namespace
+#
+# - nameOverride: "altns"
+# - fullnameOverride: "altns-actions-runner-controller"
+# - scope.singleNamespace: true
+# - scope.watchNamespace: "altns"
+# - githubWebhookServer.nameOverride: "altns"
+# - githubWebhookServer.fullnameOverride: "altns-github-webhook-server"
+
+# Update the previous installation of actions-runner-controller in the
+# default namespace to support multi-namespace installations
+helm upgrade --install \
+  -f actions-runner-controller/multi_namespace_values.yaml \
+  --namespace default \
+  --wait \
+  actions-runner-controller \
+  actions-runner-controller/actions-runner-controller
+
+# Install a new actions-runner-controller in the altns namespace
+helm upgrade --install \
+  -f actions-runner-controller/alt-namespace/values.yaml \
+  --namespace altns \
+  --wait \
+  actions-runner-controller \
+  actions-runner-controller/actions-runner-controller
+
+#
+# Update enterprise and organization settings to allow the "Default" group 
+# to be used by all organizations and repositories
+#
+
+# Deploy new ingress configurations
+kubectl apply -f ingress/multi-namespaces-ingress.yaml --namespace default
+# altns ingress configuration
+kubectl apply -f ingress/altns-ingress.yaml --namespace altns
+
+#
+# Configure the Enterprise webhooks manually
+# https://github.com/enterprises/:ENTERPRISE_NAME/settings/hooks
+#
+
+# Deploy actions-runner-controllers
+kubectl apply -f actions-runner-controller/alt-namespace/autoscale_webhook.yaml
 ```
 
 ## NUKE THE SETUP

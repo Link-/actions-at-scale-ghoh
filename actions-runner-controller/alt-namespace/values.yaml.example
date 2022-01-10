@@ -29,38 +29,14 @@ authSecret:
   annotations: {}
   ### GitHub Apps Configuration
   ## NOTE: IDs MUST be strings, use quotes
-  github_app_id: "162110"
-  github_app_installation_id: "21870103"
-  github_app_private_key: |-
-    -----BEGIN RSA PRIVATE KEY-----
-    MIIEoQIBAAKCAQEA5o1bswjQopE5Cg5cSfDz6dIzVmpFDfLtYP8iD8gPZ5ai+shx
-    MGzBpgL2L+obXmTol8dkzmwp0ZTk5+3KMSPWqMEAl0CNFTVbxCsDnrzLXfC7t91Y
-    mxtvP+wqQ22aRI7clONn6z+vGJpyR3UdXJtHxEefyvkRiih4kfpI+ZUpts8hdgaH
-    XAsCKGa/9+CvuDuM6muD9pnzbB2mcxBwprxsTzPyTXDQ8cCLjb7+77eFkTk2nXTg
-    vzwGqizqJE4tL4pMtfDgBv0IA+AE6JQOd1AOkYHjmfTOgywgVfEdTldqRJvUBy+s
-    ZXjJjjS3NZ7aUWl/vVUuQukUSfP6saqMmFGlqwIDAQABAoIBAFPB7Rt4y1sUCTXX
-    C74tFF/Q5qexSc8MfyKq7bPwCXCnsCQNp9lg2WU3VDsKANFlNX7WiI/ZicPDJPoB
-    UGBT1ctO+qj4YYjf7quwuMr1aaiCKaBdgLAw4lTFtoDyk4XupMJOb1VuuGzmxzeg
-    m38mRodPQgUaQT4A//SAifxqLVJk8usozvuzqI1lH7zEGxis9QarUDJfGOcn7nPg
-    y4jXSQAzTKIoNBuqrSrTU877zoSClRWbM+E7Wr7JEA6y83db0K+VxrhZQcJZBObt
-    8+HSQePimOrBLEgeyBBXgHz+8p8PGl6qsPc6xCFb2ZlmINBidTHbbyY7WYXQ9BUh
-    K0vjpokCgYEA/H3EdhZzu3I/c3Ki1q5w1sYkTV0BnCGZdOJ1avUNNS8oKaR4WW1y
-    vh0lSk9qKcKhlgNoqywyhC42iG5bRLdChR5AOtkCr62OXL8bHmadtS0lZkNFzpL1
-    6s+gSt7QeJCc5ovVob+VFYUy761jEL/+WOXgeHaLuTSlMUGHDQ++hc0CgYEA6cGK
-    +hLjIWlVDxrZkuzeJNyL3iUMZc3Kzsk+5IQ/VwsY8kQrjEJfnujWXOU05xPK6LyJ
-    rAFthvonGgy1ZIwdgFrLjgdYakw0GKcHIJpua27JJKD9x/ABvHbDC3tOkEQqLeal
-    y4iBqRaLUo5PvcGus6kIH4zVyJJMIdTPJG3d4VcCgYEA4ZCp1qUwNyFVthmPiCLH
-    A9h3zfVs3sLViSpWo3rQldbPFoSsT5gLjfQTwFM6EJykJpRdCa6uYo+2gCO2vajK
-    cIoZ73i3gaKXMBw6aepaseTnKHipAGch8ugR11E/BLaMtRnvfFTfJx6b5qsLeYdL
-    /rc+1d9x678wZNSZhf2uw3ECgYBzb2yeSi14Fng22V+QuwCI25EGxuz0aUg6Dg/M
-    8bIF3ikXmqqWvUBTTVBu15Hke1W80T57fskD2wzsRFJfsQHwnOXg4ae79p3Tfsh6
-    RUk6LJ+QQyCQV+nDlDKFvQLzI3Zg7IH7nRHK2qM6xaSDZN5NQrAMRJReVEDchCc3
-    KjpkSQJ/fM4uteu3AJDCsPA3Twi/6FKpBXKSNiNTlR/NCvVzkq9ahk87nDQQAdx6
-    mWnbYUHy8B7lTg2MtIK4bXOTr+WHUqgl7bhwEy4dWhprord7xg0p96pa4PmjmUYC
-    +Qu5Oyupe0or9F9KTkbE66oSIF2PxAlERnurpkeujeGjZJzkbA==
-    -----END RSA PRIVATE KEY-----
+  # github_app_id: "162110"
+  # github_app_installation_id: "21870103"
+  # github_app_private_key: |-
+  #   -----BEGIN RSA PRIVATE KEY-----
+  #   MIIEoQIBAAKCAQEA5o1bswjQopE5Cg5cSfDz6dIzVmpFDfLtYP8iD8gPZ5ai+shx
+  #   -----END RSA PRIVATE KEY-----
   ### GitHub PAT Configuration
-  #github_token: ""
+  github_token: "ghp_cWA....redacted....04qHNg"
 
 dockerRegistryMirror: ""
 image:
@@ -70,8 +46,8 @@ image:
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "altns"
+fullnameOverride: "altns-actions-runner-controller"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -163,10 +139,10 @@ additionalVolumeMounts: []
 
 scope:
   # If true, the controller will only watch custom resources in a single namespace
-  singleNamespace: false
+  singleNamespace: true
   # If `scope.singleNamespace=true`, the controller will only watch custom resources in this namespace
   # The default value is "", which means the namespace of the controller
-  watchNamespace: ""
+  watchNamespace: "altns"
 
 githubWebhookServer:
   enabled: true
@@ -178,8 +154,8 @@ githubWebhookServer:
     ### GitHub Webhook Configuration
     github_webhook_secret_token: "some-very-random-secret"
   imagePullSecrets: []
-  nameOverride: ""
-  fullnameOverride: ""
+  nameOverride: "altns"
+  fullnameOverride: "altns-github-webhook-server"
   serviceAccount:
     # Specifies whether a service account should be created
     create: false
