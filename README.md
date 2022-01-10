@@ -559,6 +559,7 @@ FROM summerwind/actions-runner:latest
 # Change the work dir to tmp because these are disposable files
 WORKDIR /tmp
 
+# EXAMPLE
 # Install a stable version of Go
 # and verify checksum of the tarball
 # 
@@ -601,7 +602,7 @@ docker push $ACR_URL/runner-image:go1.17.6
 # !!! IMPORTANT !!!
 # 
 # Edit the actions-runner-controller/go-runners-autoscale_webhook.yaml to point
-# to the correct repository
+# to the correct container image and tag
 #
 # !!! IMPORTANT !!!
 
