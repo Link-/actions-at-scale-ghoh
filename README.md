@@ -18,28 +18,41 @@ You can watch the 4 episodes here:
 
 ```text
 .
-├── .gitignore
 ├── LICENSE
 ├── README.md
 ├── actions-runner-controller
+│   ├── alt-namespace
+│   │   ├── autoscale_webhook.yaml
+│   │   └── values.yaml.example
 │   ├── autoscale_webhook.yaml
-│   └── values.yaml
+│   ├── dind_deployment.yaml
+│   ├── multi_namespace_values.yaml
+│   └── values.yaml.example
 ├── apps
-│   ├── external-service-app.yaml
 │   └── test-app.yaml
 ├── cert-manager
 │   ├── cluster-issuer-prod.yaml
 │   └── cluster-issuer-staging.yaml
-└── ingress
-    ├── ingress-tls-runners.yaml
-    ├── ingress-tls.yaml
-    └── ingress.yaml
+├── custom-runners
+├── ingress
+│   ├── altns-ingress.yaml
+│   ├── ingress-tls-runners.yaml
+│   ├── ingress-tls.yaml
+│   ├── ingress.yaml
+│   └── multi-namespaces-ingress.yaml
+└── sample-workflows
+    ├── docker_job.yaml
+    ├── matrix_jobs.yaml
+    ├── multi_job.yaml
+    └── single_job.yml
 ```
 
-- `ingress/`: contains the ingress controller configuration
+- `actions-runner-controller/`: contains the actions-runner-controller configuration and helm chart values file
 - `apps/`: contains the sample applications used for sanity checks
 - `cert-manager/`: contains the cert-manager configuration
-- `actions-runner-controller/`: contains the actions-runner-controller configuration and helm chart values file
+- `custom-runners/`: contains the custom-runners configuration
+- `ingress/`: contains the ingress controller configuration
+- `sample-workflows/`: contains the sample workflows used for sanity checks
 
 ## Setup
 
@@ -498,7 +511,7 @@ az network application-gateway start \
 # reapply the Ingress configuration, otherwise you'll get 502 errors
 ```
 
-## Alternative Practices
+## Advanced Configuration
 
 ### Configuring our Web Application Firewall (WAF)
 
