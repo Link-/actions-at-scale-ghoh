@@ -507,8 +507,12 @@ az network application-gateway start \
   --resource-group GitHubActionsRunners \
   --name GitHubActionsRunnersAPGW
 
+# !!! IMPORTANT !!!
+#
 # Remember, when you start the application gateway, you need to 
 # reapply the Ingress configuration, otherwise you'll get 502 errors
+#
+# !!! IMPORTANT !!!
 ```
 
 ## Advanced Configuration
@@ -550,6 +554,8 @@ TBD
 # Create the new namespace
 kubectl create namespace altns
 
+# !!! IMPORTANT !!!
+#
 # In order to configure multiple actions-runner-controllers in different
 # namesapces we have to introduce changes to these keys in the values.yaml
 # Replace "altns" with the name of your namespace
@@ -560,6 +566,8 @@ kubectl create namespace altns
 # - scope.watchNamespace: "altns"
 # - githubWebhookServer.nameOverride: "altns"
 # - githubWebhookServer.fullnameOverride: "altns-github-webhook-server"
+#
+# !!! IMPORTANT !!!
 
 # Update the previous installation of actions-runner-controller in the
 # default namespace to support multi-namespace installations
@@ -578,20 +586,24 @@ helm upgrade --install \
   actions-runner-controller \
   actions-runner-controller/actions-runner-controller
 
+# !!! IMPORTANT !!!
 #
 # Update enterprise and organization settings to allow the "Default" group 
 # to be used by all organizations and repositories
 #
+# !!! IMPORTANT !!!
 
 # Deploy new ingress configurations
 kubectl apply -f ingress/multi-namespaces-ingress.yaml --namespace default
 # altns ingress configuration
 kubectl apply -f ingress/altns-ingress.yaml --namespace altns
 
+# !!! IMPORTANT !!!
 #
 # Configure the Enterprise webhooks manually
 # https://github.com/enterprises/:ENTERPRISE_NAME/settings/hooks
 #
+# !!! IMPORTANT !!!
 
 # Deploy actions-runner-controllers
 kubectl apply -f actions-runner-controller/alt-namespace/autoscale_webhook.yaml
