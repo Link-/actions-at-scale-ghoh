@@ -1,0 +1,32 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: go-runners
+  namespace: default
+spec:
+  replicas: 0
+  template:
+    spec:
+      organization: Inner-Sanctum
+      image: githubactionsohacr.azurecr.io/runner-image:go1.17.6
+      imagePullPolicy: Always
+      labels:
+        - go
+        - azure
+      env:
+      - name: RUNNER_FEATURE_FLAG_EPHEMERAL
+        value: "true"
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: go-runners-deployment-autoscaler
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: go-runners
+  minReplicas: 0
+  maxReplicas: 2
+  scaleUpTriggers:
+  - githubEvent: {}
+    duration: "1m"

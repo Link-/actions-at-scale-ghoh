@@ -1,0 +1,22 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Custom runner job
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ['azure', 'go']
+
+    steps:
+
+      - name: Compile and run a Go file
+        run: |
+          echo -e 'package main\n\nimport "fmt"\n\nfunc main() {\n    fmt.Println("Hello, World!")\n}' > hello.go
+          /usr/local/go/bin/go run hello.go
