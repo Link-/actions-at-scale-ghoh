@@ -26,6 +26,7 @@ You can watch the 4 episodes here:
 │   │   └── values.yaml.example
 │   ├── autoscale_webhook.yaml
 │   ├── dind_deployment.yaml
+│   ├── go-runners-autoscale_webhook.yaml
 │   ├── multi_namespace_values.yaml
 │   └── values.yaml.example
 ├── apps
@@ -34,6 +35,7 @@ You can watch the 4 episodes here:
 │   ├── cluster-issuer-prod.yaml
 │   └── cluster-issuer-staging.yaml
 ├── custom-runners
+│   └── Dockerfile
 ├── ingress
 │   ├── altns-ingress.yaml
 │   ├── ingress-tls-runners.yaml
@@ -41,16 +43,18 @@ You can watch the 4 episodes here:
 │   ├── ingress.yaml
 │   └── multi-namespaces-ingress.yaml
 └── sample-workflows
+    ├── custom-runner.yaml
     ├── docker_job.yaml
     ├── matrix_jobs.yaml
     ├── multi_job.yaml
     └── single_job.yml
 ```
 
-- `actions-runner-controller/`: contains the actions-runner-controller configuration and helm chart values file
+- `actions-runner-controller/`: contains the actions-runner-controller configuration and helm chart values file for the default namespace
+- `actions-runner-controller/alt-namespace/`: contains the actions-runner-controller configuration and helm chart values file for the alternate namespace
 - `apps/`: contains the sample applications used for sanity checks
 - `cert-manager/`: contains the cert-manager configuration
-- `custom-runners/`: contains the custom-runners configuration
+- `custom-runners/`: contains the Dockerfile of a custom runner image
 - `ingress/`: contains the ingress controller configuration
 - `sample-workflows/`: contains the sample workflows used for sanity checks
 
