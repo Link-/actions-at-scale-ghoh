@@ -60,6 +60,8 @@ You can watch the 4 episodes here:
 
 ## Setup
 
+:warning: *All the below assumes you are running `Bash`.*
+
 ### Install az cli
 
 ```bash
