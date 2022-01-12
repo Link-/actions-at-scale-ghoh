@@ -6,9 +6,34 @@
 
 This repository contains the scripts and configuration files for the GitHub Actions at scale in the Enterprise office hours video series.
 
-You can watch the 4 episodes here:
+## Agenda
 
-> TBD: Add link to the video series
+*All episodes were followed by a live Q&A.*
+
+**Episode 1:**
+
+<a href="https://www.youtube.com/watch?v=OhNroaLxMzc" target="_blank"><img src="./images/episode_1.png" width="70%" /></a>
+
+- Setup and configured AKS
+- Deploy and attach an Application Gateway as our Ingress Controller
+
+**Episode 2:**
+
+<a href="https://www.youtube.com/watch?v=8Lw8CjEV-FA" target="_blank"><img src="./images/episode_2.png" width="70%" /></a>
+
+- Configure cert-manager for TLS termination
+- Create a GitHub App
+- Install & configure actions-runner-controller
+- Demonstrate auto-scaling
+
+**Episode 3:**
+
+<a href="https://www.youtube.com/watch?v=9kE8FsQSnDU" target="_blank"><img src="./images/episode_3.png" width="70%" /></a>
+
+- Configure our Web Application Firewall (WAF)
+- Enable and use Docker in Docker
+- Create a custom self-hosted runner image
+- Install multiple actions-runner-controllers for different namespaces
 
 ## Reference Architecture
 
@@ -679,10 +704,19 @@ kubectl apply -f ingress/altns-ingress.yaml --namespace altns
 kubectl apply -f actions-runner-controller/alt-namespace/autoscale_webhook.yaml
 ```
 
-## NUKE THE SETUP
+### NUKE THE SETUP
 
 This will destroy the resource group and all the services associated with it (i.e. everything created above).
 
 ```bash
 az group delete --name GitHubActionsRunners
 ```
+
+## References
+
+- **Adopting GitHub Actions for Enterprise Guide:**
+  - GitHub Enterprise Cloud: <https://docs.github.com/en/enterprise-cloud@latest/admin/guides>
+  - GitHub Enterprise Server: <https://docs.github.com/en/enterprise-server@latest/admin/guides>
+- **Azure AKS docs:** <https://docs.microsoft.com/en-us/azure/aks/>
+- **Azure Application Gateway docs:** <https://docs.microsoft.com/en-us/azure/application-gateway/>
+- **Azure CLI docs:** <https://docs.microsoft.com/en-us/cli/azure/>
