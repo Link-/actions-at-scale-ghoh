@@ -14,7 +14,7 @@ This repository contains the scripts and configuration files for the GitHub Acti
 
 <a href="https://www.youtube.com/watch?v=OhNroaLxMzc" target="_blank"><img src="./images/episode_1.png" width="70%" /></a>
 
-- Setup and configured AKS
+- Setup and configure AKS
 - Deploy and attach an Application Gateway as our Ingress Controller
 
 **Episode 2:**
