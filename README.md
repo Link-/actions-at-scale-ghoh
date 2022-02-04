@@ -40,7 +40,7 @@ This repository contains the scripts and configuration files for the GitHub Acti
 ![Reference architecture diagram](./images/GitHub-Actions_shr-arch-ref_v03BD-Azure.png)
 
 ## Pre-Requisites
-- Azure Subscription with at least [Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) + [User Access Administrator](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator) built-in roles. You will be performing role assignments when using the Azure Application Gateway with AKS and when integrating Azure Container Registry with AKS.
+- Azure Subscription with at least [Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) + [User Access Administrator](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator) built-in roles. You will be performing role assignments when using the Azure Application Gateway with AKS and when integrating Azure Container Registry with AKS. If you need an Azure subscription, [you can register for a free account with $200 credit](https://azure.microsoft.com/en-us/free/) or if you have [Visual Studio Enterprise](https://azure.microsoft.com/en-us/pricing/member-offers/credit-for-visual-studio-subscribers/) then you can redeem a monthly credit.
 
 ## Folder Structure
 
