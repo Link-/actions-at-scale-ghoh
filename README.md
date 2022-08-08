@@ -512,6 +512,12 @@ helm upgrade --install \
 # Update the ingress controller
 kubectl apply -f ingress/ingress-tls-runners.yaml --namespace default
 
+# !!! IMPORTANT !!!
+#
+# Update the actions-runner-controller/autoscale_webhook.yaml file with your organization's name
+#
+# !!! IMPORTANT !!!
+
 # Create a new runner deployment
 kubectl apply -f actions-runner-controller/autoscale_webhook.yaml --namespace default
 
