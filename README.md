@@ -6,6 +6,10 @@
 
 This repository contains the scripts and configuration files for the GitHub Actions at scale in the Enterprise office hours video series.
 
+### IMPORTANT NOTICE 
+
+**This project has not been updated since its release. Some of the instructions shared below (and in the videos) might not be applicable any more. Use your best judgement when following these instructions!**
+
 ## Agenda
 
 *All episodes were followed by a live Q&A.*
