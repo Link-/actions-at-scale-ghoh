@@ -1,3 +1,9 @@
+# ⚠️ IMPORTANT NOTICE 
+
+**This project has not been updated since its release. Some of the instructions shared below (and in the videos) might not be applicable any more. Use your best judgement when following these instructions!**
+
+With the release of the [Autoscaling Runner Scale Set mode](https://github.com/actions/actions-runner-controller/tree/master/docs/preview/gha-runner-scale-set-controller) you are highly encouraged to use it as opposed to these legacy options.
+
 # Adopting GitHub Actions at scale in the Enterprise
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -5,10 +11,6 @@
 > GitHub Office Hours: Adopting GitHub Actions at scale in the Enterprise
 
 This repository contains the scripts and configuration files for the GitHub Actions at scale in the Enterprise office hours video series.
-
-### IMPORTANT NOTICE 
-
-**This project has not been updated since its release. Some of the instructions shared below (and in the videos) might not be applicable any more. Use your best judgement when following these instructions!**
 
 ## Agenda
 
